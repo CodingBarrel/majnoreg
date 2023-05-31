@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,13 +13,17 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
+@DynamicUpdate
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int roleId;
-    private String name;
+    private String firstName;
     private String surname;
-    private String middlename;
-    private String passportCode;
+    private String middleName;
+    private String email;
+    private int taxpayerCode;
+    private String passportSeries;
+    private int passportCode;
 }
