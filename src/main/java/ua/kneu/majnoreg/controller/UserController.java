@@ -2,16 +2,13 @@ package ua.kneu.majnoreg.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import ua.kneu.majnoreg.entity.User;
 import ua.kneu.majnoreg.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller

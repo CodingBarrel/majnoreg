@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public UserRole findRoleById(int id){
-        log.info("Request to find all user role id: " + id);
+        log.info("Request to find user role id: " + id);
         return userRoleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User role not found"));
     }
 

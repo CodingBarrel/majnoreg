@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create declaration</title>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<form method="post" action="/declarations/create" th:object="${declaration}">
+    <label for="property_type">Property Type</label> :
+    <select th:field="*{propertyType.id}" id="property_type">
+        <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}" th:text="${propertyType.name}"></option>
+    </select>
+    <label for="address">address</label>
+    <input type="text" id="address" th:field="*{address}">
+    <label for="description">description</label>
+    <input type="text" id="description" th:field="*{description}">
+    <label for="file_names">file Names</label>
+    <input type="file" id="file_names" th:field="*{fileNames}">
+    <input type="submit" value="Send">
+</form>
+</body>
+</html>

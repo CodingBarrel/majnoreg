@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find all declarations</title>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<table>
+    <tr>
+        <th>id</th>
+        <th>userId</th>
+        <th>propertyType</th>
+        <th>address</th>
+        <th>description</th>
+        <th>fileNames</th>
+        <th>status</th>
+        <th>sendTime</th>
+        <th>lastUpdateTime</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="declaration : ${declarations}">
+        <td th:text="${declaration.id}"></td>
+        <td th:text="${declaration.user.id}"></td>
+        <td th:text="${declaration.propertyType.name}"></td>
+        <td th:text="${declaration.address}"></td>
+        <td th:text="${declaration.description}"></td>
+        <td th:text="${declaration.fileNames}"></td>
+        <td th:text="${declaration.status}"></td>
+        <td th:text="${declaration.sendTime}"></td>
+        <td th:text="${declaration.lastUpdateTime}"></td>
+        <td>
+            <a th:href="@{{id}/edit (id=${declaration.id})}">edit</a>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{/declarations/{id} (id=${declaration.id})}">
+                <input type="submit" value="delete">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
