@@ -23,7 +23,7 @@
     </tr>
     <tr th:each="user : ${userList}">
         <td th:text="${user.id}"></td>
-        <td th:text="${user.roleId}"></td>
+        <td th:text="${user.role.name}"></td>
         <td th:text="${user.firstName}"></td>
         <td th:text="${user.surname}"></td>
         <td th:text="${user.middleName}"></td>
@@ -32,7 +32,7 @@
         <td th:text="${user.passportSeries}"></td>
         <td th:text="${user.passportCode}"></td>
         <td>
-            <a th:href="@{users/{id}/edit (id=${user.id})}">edit</a>
+            <a th:href="@{{id}/edit (id=${user.id})}">edit</a>
         </td>
         <td>
             <form th:method="delete" th:action="@{/users/{id} (id=${user.id})}">

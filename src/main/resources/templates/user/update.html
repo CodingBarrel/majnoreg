@@ -22,8 +22,11 @@
   <input type="text" id="passport_series" th:field="*{passportSeries}">
   <label for="passport_code">Passport code</label>
   <input type="number" id="passport_code" th:field="*{passportCode}">
-  <label for="role_id">Role id</label>
-  <input type="number" id="role_id" th:field="*{roleId}">
+    <label for="roles" th:text="Role"></label> :
+    <select th:field="*{role.id}" id="roles">
+      <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+              th:selected="${role.id == user.role.id}"></option>
+    </select>
   <input type="submit" value="Send">
 </form>
 </body>

@@ -1,11 +1,9 @@
 package ua.kneu.majnoreg.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import ua.kneu.majnoreg.entity.dict.UserRole;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,9 +14,10 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int roleId;
+    @ManyToOne
+    private UserRole role;
     private String firstName;
     private String surname;
     private String middleName;
