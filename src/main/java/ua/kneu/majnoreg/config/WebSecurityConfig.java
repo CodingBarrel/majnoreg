@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 
 @Configuration
@@ -17,16 +18,21 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
          return httpSecurity
                  .csrf(AbstractHttpConfigurer::disable)
+                 .authorizeHttpRequests(requests -> requests
+                        // .requestMatchers("/users/**")
+                        //    .hasAnyRole("Наглядач","Адміністратор", "Менеджер", "Користувач")
+                         .requestMatchers("/","/declarations/**", "/users/**", "/error/*", "/about")
+                            .permitAll()
+                         .anyRequest().authenticated()
+                 )
+                 .formLogin(form -> form.loginPage("/users/login").usernameParameter("login").permitAll())
+                 .logout(logout -> logout.logoutUrl("/users/logout").logoutSuccessUrl("/"))
                  .build();
      }
 
     @Bean
-    public CommonsRequestLoggingFilter requestLoggingFilter() {
-        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
-        loggingFilter.setIncludeClientInfo(true);
-        loggingFilter.setIncludeQueryString(true);
-        loggingFilter.setIncludePayload(true);
-        loggingFilter.setMaxPayloadLength(64000);
-        return loggingFilter;
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
 }
