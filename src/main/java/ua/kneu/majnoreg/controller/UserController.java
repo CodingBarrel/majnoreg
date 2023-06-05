@@ -24,13 +24,22 @@ public class UserController {
         return "user/register";
     }
 
-    @PostMapping(path = {"/register", "/register/"})
+
+    @Transactional
+    @PostMapping(path = "/register")
     public String addNewUser(@ModelAttribute User user) {
         userService.create(user);
         return "redirect:";
     }
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping(path = "/login")
+    public String getLoginForm(Model model){
+        log.info("Sending user login form");
+        model.addAttribute("userCredentials", new UserCredentials());
+        return "user/login";
+    }
+
+    @GetMapping(path = "")
     public String getAllUsers(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("userList", userList);
