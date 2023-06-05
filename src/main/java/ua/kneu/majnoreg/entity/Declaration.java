@@ -19,7 +19,7 @@ public class Declaration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne
-    private User user;
+    private UserInformation userInformation;
     @ManyToOne
     private PropertyType propertyType;
     private String address;
