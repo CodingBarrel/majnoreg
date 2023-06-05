@@ -7,7 +7,7 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form method="post" action="/users/register" th:object="${user}">
+<form method="post" action="/auth/register" th:object="${user}">
     <label for="login">Логін</label>
     <input type="text" id="login" th:field="*{credentials.login}">
     <label for="password">Пароль</label>

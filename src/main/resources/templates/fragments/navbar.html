@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="navbar">
     <div class="container">
         <a href="/">Головна</a>
         <a href="/declarations">Реєстр</a>
         <a href="/about">Про нас</a>
-        <a href="/users/login">Обліковий запис</a>
+        <a sec:authorize="isAuthenticated()" href="/user/declarations">Обліковий запис</a>
+        <a sec:authorize="!isAuthenticated()" href="/auth/login">Авторизація</a>
     </div>
 </div>
 </html>

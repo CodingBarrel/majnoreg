@@ -35,6 +35,12 @@ public class DeclarationService {
     public PropertyType findPropertyTypeById(int id){
         log.info("Request to find declaration property type id: " + id);
         return propertyTypeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Declaration property type not found"));
+
+    }
+
+
+    public List<Declaration> findDeclarationsByUserId(int id){
+        return declarationRepository.findByUserInformation_Id(id);
     }
 
     public List<Declaration> findAll(){

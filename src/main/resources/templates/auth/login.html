@@ -7,13 +7,13 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form method="post" action="/users/login" th:object="${userCredentials}">
+<form method="post" action="/auth/login" th:object="${userCredentials}">
     <label for="login">Логін</label>
     <input type="text" id="login" th:field="*{login}">
     <label for="password">Пароль</label>
     <input type="password" id="password" th:field="*{password}">
     <input type="submit" value="Send">
-    <a href="/users/register">Створити обліковий запис</a>
+    <a href="/auth/register">Створити обліковий запис</a>
 </form>
 </body>
 </html>

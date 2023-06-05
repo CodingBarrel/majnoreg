@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ЄШкода - Реєстр майна</title>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<table>
+    <h3>Реєстр майна</h3>
+    <tr>
+        <th>ID</th>
+        <th>ID Користувача</th>
+        <th>Тип майна</th>
+        <th>Адреса</th>
+        <th>Опис</th>
+        <th>Файли</th>
+        <th>Стан</th>
+        <th>Час надсилання</th>
+        <th>Час останнього оновлення</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="declaration : ${declarations}">
+        <td th:text="${declaration.id}"></td>
+        <td th:text="${declaration.userInformation.id}"></td>
+        <td th:text="${declaration.propertyType.name}"></td>
+        <td th:text="${declaration.address}"></td>
+        <td th:text="${declaration.description}"></td>
+        <td th:text="${declaration.fileNames}"></td>
+        <td th:text="${declaration.status}"></td>
+        <td th:text="${declaration.sendTime}"></td>
+        <td th:text="${declaration.lastUpdateTime}"></td>
+        <td>
+            <a th:href="@{{id}/edit (id=${declaration.id})}">редагувати</a>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{/declarations/{id} (id=${declaration.id})}">
+                <input type="submit" value="видалити">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

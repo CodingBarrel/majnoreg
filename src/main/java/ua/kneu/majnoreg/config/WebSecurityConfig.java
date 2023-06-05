@@ -21,12 +21,13 @@ public class WebSecurityConfig {
                  .authorizeHttpRequests(requests -> requests
                         // .requestMatchers("/users/**")
                         //    .hasAnyRole("Наглядач","Адміністратор", "Менеджер", "Користувач")
+                         .requestMatchers("/auth/**").permitAll()
                          .requestMatchers("/","/declarations/**", "/users/**", "/error/*", "/about")
                             .permitAll()
                          .anyRequest().authenticated()
                  )
-                 .formLogin(form -> form.loginPage("/users/login").usernameParameter("login").permitAll())
-                 .logout(logout -> logout.logoutUrl("/users/logout").logoutSuccessUrl("/"))
+                 .formLogin(form -> form.loginPage("/auth/login").usernameParameter("login").permitAll())
+                 .logout(logout -> logout.logoutUrl("/auth/logout").logoutSuccessUrl("/"))
                  .build();
      }
 

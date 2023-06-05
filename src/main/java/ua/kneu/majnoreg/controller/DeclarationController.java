@@ -2,10 +2,14 @@ package ua.kneu.majnoreg.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.kneu.majnoreg.entity.Declaration;
+import ua.kneu.majnoreg.entity.UserCredentials;
+import ua.kneu.majnoreg.entity.UserInformation;
 import ua.kneu.majnoreg.service.DeclarationService;
 
 import java.util.List;
@@ -27,6 +31,9 @@ public class DeclarationController {
 
     @PostMapping(path = "/create")
     public String createNewDeclaration(@ModelAttribute Declaration declaration) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserCredentials user = (UserCredentials) auth.getPrincipal();
+        declaration.setUserInformation(user.getUserInformation());
         declarationService.create(declaration);
         return "redirect:";
     }
