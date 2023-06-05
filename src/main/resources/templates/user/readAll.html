@@ -2,41 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Find all users</title>
+    <title>ЄШкода - Список користувачів</title>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <table>
     <tr>
-        <th>id</th>
-        <th>roleId</th>
-        <th>firstName</th>
-        <th>surname</th>
-        <th>middleName</th>
-        <th>email</th>
-        <th>taxpayerCode</th>
-        <th>passportSeries</th>
-        <th>passportCode</th>
+        <th>ID</th>
+        <th>Роль</th>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>По батькові</th>
+        <th>РНОКПП</th>
+        <th>Серія паспорту</th>
+        <th>Код паспорту</th>
         <th></th>
         <th></th>
     </tr>
-    <tr th:each="user : ${userList}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.role.name}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.surname}"></td>
-        <td th:text="${user.middleName}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.taxpayerCode}"></td>
-        <td th:text="${user.passportSeries}"></td>
-        <td th:text="${user.passportCode}"></td>
+    <tr th:each="userInformation : ${userList}">
+        <td th:text="${userInformation.id}"></td>
+        <td th:text="${userInformation.role.name}"></td>
+        <td th:text="${userInformation.firstName}"></td>
+        <td th:text="${userInformation.surname}"></td>
+        <td th:text="${userInformation.middleName}"></td>
+        <td th:text="${userInformation.taxpayerCode}"></td>
+        <td th:text="${userInformation.passportSeries}"></td>
+        <td th:text="${userInformation.passportCode}"></td>
         <td>
-            <a th:href="@{{id}/edit (id=${user.id})}">edit</a>
+            <a th:href="@{{id}/edit (id=${userInformation.id})}">редагувати</a>
         </td>
         <td>
-            <form th:method="delete" th:action="@{/users/{id} (id=${user.id})}">
-                <input type="submit" value="delete">
+            <form th:method="delete" th:action="@{/users/{id} (id=${userInformation.id})}">
+                <input type="submit" value="видалити">
             </form>
         </td>
     </tr>

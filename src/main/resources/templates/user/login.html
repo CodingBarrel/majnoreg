@@ -2,15 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login user</title>
+    <title>ЄШкода - Авторизація</title>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form method="post" action="/users/register" th:object="${user}">
-    <label for="passport_code">Passport code</label>
-    <input type="text" id="passport_code" th:field="*{passportCode}">
+<form method="post" action="/users/login" th:object="${userCredentials}">
+    <label for="login">Логін</label>
+    <input type="text" id="login" th:field="*{login}">
+    <label for="password">Пароль</label>
+    <input type="password" id="password" th:field="*{password}">
     <input type="submit" value="Send">
+    <a href="/users/register">Створити обліковий запис</a>
 </form>
 </body>
 </html>

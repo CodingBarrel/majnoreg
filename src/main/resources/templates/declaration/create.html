@@ -2,23 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create declaration</title>
+    <title>ЄШкода - Подати заяву</title>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <form method="post" action="/declarations/create" th:object="${declaration}">
-    <label for="property_type">Property Type</label> :
+    <h3>Заява про пошкодження майна</h3>
+    <label for="property_type">Тип майна</label> :
     <select th:field="*{propertyType.id}" id="property_type">
         <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}" th:text="${propertyType.name}"></option>
     </select>
-    <label for="address">address</label>
+    <label for="address">Населений пункт і адреса</label>
     <input type="text" id="address" th:field="*{address}">
-    <label for="description">description</label>
+    <label for="description">Опис</label>
     <input type="text" id="description" th:field="*{description}">
-    <label for="file_names">file Names</label>
+    <label for="file_names">Прикріплені файли</label>
     <input type="file" id="file_names" th:field="*{fileNames}">
-    <input type="submit" value="Send">
+    <input type="submit" value="Подати заяву">
 </form>
 </body>
 </html>
