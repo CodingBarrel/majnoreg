@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ua.kneu.majnoreg.entity.Declaration;
+import ua.kneu.majnoreg.entity.dict.DeclarationStatus;
 import ua.kneu.majnoreg.entity.dict.PropertyType;
 import ua.kneu.majnoreg.repository.DeclarationRepository;
 import ua.kneu.majnoreg.repository.dict.DeclarationPropertyTypeRepository;
+import ua.kneu.majnoreg.repository.dict.DeclarationStatusRepository;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
 public class DeclarationService {
     private final DeclarationRepository declarationRepository;
     private final DeclarationPropertyTypeRepository propertyTypeRepository;
+    private final DeclarationStatusRepository statusRepository;
 
     public void create(Declaration declaration) {
         log.info("Request to create declaration: " + declaration);
@@ -37,6 +40,12 @@ public class DeclarationService {
     public PropertyType findPropertyTypeById(int id){
         log.info("Request to find declaration property type id: " + id);
         return propertyTypeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Declaration property type not found"));
+
+    }
+
+    public DeclarationStatus findDeclarationStatusById(int id){
+        log.info("Request to find declaration status id: " + id);
+        return statusRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Declaration status not found"));
 
     }
 
@@ -61,6 +70,11 @@ public class DeclarationService {
     public List<PropertyType> findAllPropertyTypes(){
         log.info("Request to find all declaration property types");
         return propertyTypeRepository.findAll();
+    }
+
+    public List<DeclarationStatus> findAllDeclarationsStatuses(){
+        log.info("Request to find all declaration statuses");
+        return statusRepository.findAll();
     }
 
     public void update(Declaration declaration){

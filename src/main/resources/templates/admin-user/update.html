@@ -7,25 +7,40 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form th:method="patch" th:action="@{/users/{id} (id=${userInformation.id})}" th:object="${userInformation}">
-  <label for="first_name">Ім'я</label>
-  <input type="text" id="first_name" th:field="*{firstName}">
-  <label for="second_name">Прізвище</label>
-  <input type="text" id="second_name" th:field="*{surname}">
-  <label for="middle_name">По-батькові(за наявності)</label>
-  <input type="text" id="middle_name" th:field="*{middleName}">
-  <label for="taxpayer_code">РНОКПП</label>
-  <input type="text" id="taxpayer_code" th:field="*{taxpayerCode}">
-  <label for="passport_series">Серія паспорту(за наявності)</label>
-  <input type="text" id="passport_series" th:field="*{passportSeries}">
-  <label for="passport_code">Код паспорту</label>
-  <input type="number" id="passport_code" th:field="*{passportCode}">
-    <label for="roles" th:text="Role"></label> :
-    <select th:field="*{role.id}" id="roles">
+<form th:method="patch" th:action="@{/admin-users/{id} (id=${userInformation.id})}" th:object="${userInformation}" class="mt-4">
+  <div class="form-group">
+    <label for="first_name">Ім'я</label>
+    <input type="text" id="first_name" th:field="*{firstName}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="second_name">Прізвище</label>
+    <input type="text" id="second_name" th:field="*{surname}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="middle_name">По-батькові(за наявності)</label>
+    <input type="text" id="middle_name" th:field="*{middleName}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="taxpayer_code">РНОКПП</label>
+    <input type="text" id="taxpayer_code" th:field="*{taxpayerCode}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="passport_series">Серія паспорту(за наявності)</label>
+    <input type="text" id="passport_series" th:field="*{passportSeries}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="passport_code">Код паспорту</label>
+    <input type="number" id="passport_code" th:field="*{passportCode}" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="roles">Роль</label>
+    <select th:field="*{role.id}" id="roles" class="form-control">
       <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
               th:selected="${role.id == userInformation.role.id}"></option>
     </select>
-  <input type="submit" value="Send">
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
 </form>
+
 </body>
 </html>

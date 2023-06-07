@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>ЄШкода - Реєстр мого майна</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<table>
+<div class="container mt-4">
     <h3>Реєстр майна</h3>
-    <tr>
-        <th>Тип майна</th>
-        <th>Адреса</th>
-        <th>Стан</th>
-        <th></th>
-    </tr>
-    <tr th:each="declaration : ${declarations}">
-        <td th:text="${declaration.propertyType.name}"></td>
-        <td th:text="${declaration.address}"></td>
-        <td th:text="${declaration.status}"></td>
-        <td>
-            <a th:href="@{{id}/edit (id=${declaration.id})}">редагувати</a>
-        </td>
-    </tr>
-</table>
-<a href="/auth/logout">Вийти</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Тип майна</th>
+            <th>Адреса</th>
+            <th>Дата подання</th>
+            <th>Дата останнього оновлення</th>
+            <th>Стан</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="declaration : ${declarations}">
+            <td th:text="${declaration.propertyType.name}"></td>
+            <td th:text="${declaration.address}"></td>
+            <td th:text="${declaration.sendTime}"></td>
+            <td th:text="${declaration.lastUpdateTime}"></td>
+            <td th:text="${declaration.status.name}"></td>
+            <td>
+                <a th:href="@{/declarations/{id}/edit (id=${declaration.id})}" class="btn btn-primary">редагувати</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/auth/logout" class="btn btn-secondary">Вийти</a>
+</div>
 </body>
 </html>

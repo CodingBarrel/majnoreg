@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(path = "/admin")
+@RequestMapping(path = "/admin-users")
 public class AdminUserController {
     private final UserService userService;
 
@@ -22,7 +22,7 @@ public class AdminUserController {
         log.info("Sending all users");
         List<UserInformation> users = userService.findAll();
         model.addAttribute("userList", users);
-        return "user/readAll";
+        return "admin-user/readAll";
     }
 
     @GetMapping(path = "/{id}/edit")
@@ -30,7 +30,7 @@ public class AdminUserController {
         log.info("Sending user {} for update", id);
         model.addAttribute("userInformation", userService.findById(id));
         model.addAttribute("roles", userService.findAllRoles());
-        return "user/update";
+        return "admin-user/update";
     }
 
     @PatchMapping(path = "/{id}")
@@ -38,13 +38,13 @@ public class AdminUserController {
         log.info("Updating user {}", id);
         userInformation.setId(id);
         userService.update(userInformation);
-        return "redirect:";
+        return "redirect:/admin-users";
     }
 
     @DeleteMapping(path = "/{id}")
     public String deleteUser(@PathVariable int id) {
         log.info("Deleting user {}", id);
         userService.deleteById(id);
-        return "redirect:";
+        return "redirect:/admin-users";
     }
 }

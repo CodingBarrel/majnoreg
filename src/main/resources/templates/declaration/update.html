@@ -7,19 +7,28 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form th:method="patch" th:action="@{/declarations/{id} (id=${declaration.id})}" th:object="${declaration}">
-    <label for="property_type">Тип майна</label>
-    <select th:field="*{propertyType.id}" id="property_type">
-        <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}" th:text="${propertyType.name}"
-                th:selected="${propertyType.id == declaration.propertyType.id}"></option>
-    </select>
-    <label for="address">Адреса</label>
-    <input type="text" id="address" th:field="*{address}">
-    <label for="description">Опис</label>
-    <input type="text" id="description" th:field="*{description}">
-    <label for="file_names">Прикріплені файли</label>
-    <input type="email" id="file_names" th:field="*{fileNames}">
-    <input type="submit" value="Send">
+<form th:method="patch" th:action="@{/declarations/{id} (id=${declaration.id})}" th:object="${declaration}" class="mt-4">
+    <div class="form-group">
+        <label for="property_type">Тип майна</label>
+        <select th:field="*{propertyType.id}" id="property_type" class="form-control">
+            <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}" th:text="${propertyType.name}"
+                    th:selected="${propertyType.id == declaration.propertyType.id}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="address">Адреса</label>
+        <input type="text" id="address" th:field="*{address}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Опис</label>
+        <input type="text" id="description" th:field="*{description}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="file_names">Прикріплені файли</label>
+        <input type="email" id="file_names" th:field="*{fileNames}" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
 </form>
+
 </body>
 </html>

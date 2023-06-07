@@ -2,39 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ЄШкода - Реєстр майна</title>
+    <title>ЄШкода - Реєстр майна адміністратора</title>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<table>
+<div class="container mt-4">
     <h3>Реєстр майна</h3>
-    <tr>
-        <th>ID</th>
-        <th>ID Користувача</th>
-        <th>Тип майна</th>
-        <th>Адреса</th>
-        <th>Опис</th>
-        <th>Файли</th>
-        <th>Стан</th>
-        <th>Час надсилання</th>
-        <th>Час останнього оновлення</th>
-        <th></th>
-    </tr>
-    <tr th:each="declaration : ${declarations}">
-        <td th:text="${declaration.id}"></td>
-        <td th:text="${declaration.userInformation.id}"></td>
-        <td th:text="${declaration.propertyType.name}"></td>
-        <td th:text="${declaration.address}"></td>
-        <td th:text="${declaration.description}"></td>
-        <td th:text="${declaration.fileNames}"></td>
-        <td th:text="${declaration.status}"></td>
-        <td th:text="${declaration.sendTime}"></td>
-        <td th:text="${declaration.lastUpdateTime}"></td>
-        <td>
-            <a th:href="@{{id}/verify (id=${declaration.id})}">перевірити</a>
-        </td>
-    </tr>
-</table>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Користувача</th>
+            <th>Тип майна</th>
+            <th>Адреса</th>
+            <th>Опис</th>
+            <th>Файли</th>
+            <th>Стан</th>
+            <th>Час надсилання</th>
+            <th>Час останнього оновлення</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="declaration : ${declarations}">
+            <td th:text="${declaration.id}"></td>
+            <td th:text="${declaration.userInformation.id}"></td>
+            <td th:text="${declaration.propertyType.name}"></td>
+            <td th:text="${declaration.address}"></td>
+            <td th:text="${declaration.description}"></td>
+            <td th:text="${declaration.fileNames}"></td>
+            <td th:text="${declaration.status.name}"></td>
+            <td th:text="${declaration.sendTime}"></td>
+            <td th:text="${declaration.lastUpdateTime}"></td>
+            <td>
+                <a th:href="@{{id}/verify (id=${declaration.id})}" class="btn btn-primary">перевірити</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

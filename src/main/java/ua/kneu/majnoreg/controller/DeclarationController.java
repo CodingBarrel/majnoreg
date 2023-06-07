@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import ua.kneu.majnoreg.entity.Declaration;
 import ua.kneu.majnoreg.entity.UserCredentials;
 import ua.kneu.majnoreg.entity.UserInformation;
+import ua.kneu.majnoreg.entity.dict.DeclarationStatus;
 import ua.kneu.majnoreg.entity.dict.PropertyType;
 import ua.kneu.majnoreg.service.DeclarationService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(path = "/declarations")
 public class DeclarationController {
+    public static final int DECLARATION_STATUS_ID_BY_DEFAULT = 1;
     private final DeclarationService declarationService;
 
     @GetMapping(path = "/create")
@@ -41,21 +44,13 @@ public class DeclarationController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserCredentials user = (UserCredentials) auth.getPrincipal();
         declaration.setUserInformation(user.getUserInformation());
+        declaration.setStatus(declarationService.findDeclarationStatusById(DECLARATION_STATUS_ID_BY_DEFAULT));
+        declaration.setSendTime(LocalDateTime.now());
+        declaration.setLastUpdateTime(LocalDateTime.now());
         declarationService.create(declaration);
         log.info("Created declaration {}", declaration);
-        return "redirect:";
+        return "redirect:/user/declarations";
     }
-
-/*    @GetMapping(path = "")
-    public String getAllDeclarations(Model model) {
-        log.info("Request to find all declarations");
-        List<Declaration> declarations = declarationService.findAll();
-        List<PropertyType> propertyTypes = declarationService.findAllPropertyTypes();
-        model.addAttribute("propertyTypes", propertyTypes);
-        model.addAttribute("declarations", declarations);
-        log.info("Sending {} declarations and {} property types", declarations.size(), propertyTypes.size());
-        return "declaration/readAll";
-    }*/
 
     @GetMapping("/search")
     public String searchDeclarations(HttpServletRequest request,
@@ -82,14 +77,17 @@ public class DeclarationController {
 
     @GetMapping(path = "/{id}/edit")
     public String getDeclarationById(@PathVariable int id, Model model) {
+        log.info("Request to edit declaration {}", id);
         model.addAttribute("declaration", declarationService.findById(id));
         model.addAttribute("propertyTypes", declarationService.findAllPropertyTypes());
+        log.info("Sending found declaration to edit");
         return "declaration/update";
     }
 
     @PatchMapping(path = "/{id}")
     public String updateDeclaration(@PathVariable int id, @ModelAttribute Declaration declaration) {
         declaration.setId(id);
+        declaration.setLastUpdateTime(LocalDateTime.now());
         declarationService.update(declaration);
         return "redirect:";
     }

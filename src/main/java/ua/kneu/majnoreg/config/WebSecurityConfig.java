@@ -19,14 +19,14 @@ public class WebSecurityConfig {
          return httpSecurity
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(requests -> requests
-                         .requestMatchers("/admin-declarations/**", "admin-users/**")
+                         .requestMatchers("/admin-panel/**","/admin-declarations/**", "/admin-users/**")
                             .hasAnyRole("MANAGER","ADMIN", "SUPERVISOR")
                          .requestMatchers("/auth/**").permitAll()
-                         .requestMatchers("/","/declarations/**", "/users/**", "/error/*", "/about")
+                         .requestMatchers("/","/declarations/search", "/error/*", "/about")
                             .permitAll()
                          .anyRequest().authenticated()
                  )
-                 .formLogin(form -> form.loginPage("/auth/login").usernameParameter("login").loginProcessingUrl("/").permitAll())
+                 .formLogin(form -> form.loginPage("/auth/login").usernameParameter("login").permitAll())
                  .logout(logout -> logout.logoutUrl("/auth/logout").logoutSuccessUrl("/"))
                  .build();
      }

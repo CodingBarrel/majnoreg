@@ -3,8 +3,10 @@ package ua.kneu.majnoreg.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import ua.kneu.majnoreg.entity.dict.DeclarationStatus;
 import ua.kneu.majnoreg.entity.dict.PropertyType;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -25,7 +27,8 @@ public class Declaration {
     private String address;
     private String description;
     private String[] fileNames;
-    private String status;
-    private Date sendTime;
-    private Date lastUpdateTime;
+    @ManyToOne
+    private DeclarationStatus status;
+    private LocalDateTime sendTime;
+    private LocalDateTime lastUpdateTime;
 }
