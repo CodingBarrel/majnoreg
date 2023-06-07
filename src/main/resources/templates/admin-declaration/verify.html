@@ -8,7 +8,7 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 <form th:method="patch" th:action="@{/declarations/{id} (id=${declaration.id})}" th:object="${declaration}">
-    <label for="property_type">Тип майна</label>
+    <label for="property_type" th:text="property Type"></label> :
     <select th:field="*{propertyType.id}" id="property_type">
         <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}" th:text="${propertyType.name}"
                 th:selected="${propertyType.id == declaration.propertyType.id}"></option>

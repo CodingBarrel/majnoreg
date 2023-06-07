@@ -29,12 +29,19 @@ public class UserController {
     public String getUserDeclarationList(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserInformation user = ((UserCredentials) auth.getPrincipal()).getUserInformation();
+        System.out.println((auth.getAuthorities()));
         log.info(user.toString());
         List<Declaration> declarations = declarationService.findDeclarationsByUserId(user.getId());
         //model.addAttribute("userLogin", user.getLogin());
         model.addAttribute("declarations", declarations);
         log.info("Found {} declarations for user [}", declarations.size(), user.getId());
         return "declaration/readMy";
+    }
+
+    @GetMapping(path = "/{id}/edit")
+    public String getDeclarationById(@PathVariable int id, Model model) {
+        model.addAttribute("declaration", declarationService.findById(id));
+        return "declaration/update";
     }
 
 }

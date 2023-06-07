@@ -7,18 +7,73 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<table>
-    <h3>Реєстр майна</h3>
-    <tr>
-        <th>Тип майна</th>
-        <th>Адреса</th>
-        <th>Стан</th>
-    </tr>
-    <tr th:each="declaration : ${declarations}">
-        <td th:text="${declaration.propertyType.name}"></td>
-        <td th:text="${declaration.address}"></td>
-        <td th:text="${declaration.status}"></td>
-    </tr>
-</table>
+<h3>Реєстр майна</h3>
+<div class="container-fluid">
+    <form method="GET" th:action="@{search}" class="w-100 d-flex justify-content-center">
+        <div class="form-group">
+            <label class="input-group-text" for="property_type">Тип майна</label>
+            <select class="form-select-sm" id="property_type" name="propertyType" required>
+                <option th:each="propertyType : ${propertyTypes}" th:value="${propertyType.id}"
+                        th:text="${propertyType.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="input-group-text" for="address">Адреса</label>
+            <input class="form-control-sm" type="text" id="address" name="address">
+        </div>
+        <div class="form-group">
+            <label class="input-group-text" for="size">Розмір сторінки</label>
+            <select id="size" name="size" class="form-select form-select-sm">
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10" selected="selected">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+            </select>
+        </div>
+        <input value="Пошук" class="btn ms-2 btn-secondary" type="submit">
+    </form>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Тип майна</th>
+            <th>Адреса</th>
+            <th>Стан</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="declaration : ${declarations.content}">
+            <td th:text="${declaration.propertyType.name}"></td>
+            <td th:text="${declaration.address}"></td>
+            <td th:text="${declaration.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${declarations.totalPages > 1}">
+    <ul class="pagination justify-content-center">
+        <li th:class="${declarations.first} ? 'page-item disabled' : 'page-item'">
+            <a th:href="@{search(page=0, size=${declarations.size})}" class="page-link">&laquo;</a>
+        </li>
+        <li th:class="${not declarations.first} ? 'page-item' : 'page-item disabled'">
+            <a th:href="@{search(page=${declarations.number - 1}, size=${declarations.size})}" class="page-link">&lsaquo;</a>
+        </li>
+        <li th:each="pageNum : ${#numbers.sequence(0, declarations.totalPages-1)}"
+            th:class="${declarations.number == pageNum} ? 'page-item active' : 'page-item'">
+            <a th:href="@{search(page=${pageNum}, size=${declarations.size})}" class="page-link"
+               th:text="${pageNum+1}"></a>
+        </li>
+        <li th:class="${declarations.last} ? 'page-item disabled' : 'page-item'">
+            <a th:href="@{search(page=${declarations.totalPages-1}, size=${declarations.size})}" class="page-link">&raquo;</a>
+        </li>
+    </ul>
+</div>
+
 </body>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </html>

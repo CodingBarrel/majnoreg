@@ -7,13 +7,29 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/navbar :: navbar}"></div>
-<form method="post" action="/auth/login" th:object="${userCredentials}">
-    <label for="login">Логін</label>
-    <input type="text" id="login" th:field="*{login}">
-    <label for="password">Пароль</label>
-    <input type="password" id="password" th:field="*{password}">
-    <input type="submit" value="Send">
-    <a href="/auth/register">Створити обліковий запис</a>
-</form>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div th:if="${param.error} and ${session}">
+            <div class="alert alert-dismissible alert-danger error">
+                <span class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</span>
+            </div>
+        </div>
+        <form method="post" action="/auth/login" th:object="${userCredentials}">
+            <div class="mb-3">
+                <label class="form-label" for="login">Логін</label>
+                <input class="form-control" type="text" id="login" name="login" autofocus required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Пароль</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Авторизуватися">
+                <a class="btn btn-secondary"
+                   href="/auth/register">Створити обліковий запис</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -5,9 +5,65 @@
     <title>ЄШкода - Головна</title>
 </head>
 <body>
-<div th:insert="fragments/header :: header"></div>
-<div th:insert="fragments/navbar :: navbar"></div>
-<a href="/declarations/create">Повідомити про пошкодження</a>
-<p>Є питання?</p>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 text-center">
+            <a class="btn btn-primary btn-lg" style="padding: 24px 48px" href="/declarations/create">Повідомити про пошкодження</a>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <h1 class="display-4 mb-5 mt-5">Є питання?</h1>
+</div>
+<div class="accordion" id="faqAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading1">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
+                Як подати заяву і що для цього потрібно
+            </button>
+        </h2>
+        <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Для подання заяви натисніть кнопку зверху "Повідомити про пошкодження" та заповність необхідну форму. Для цього вам необхідна інформація щодо об'єкту що ви хочете ввести на облік
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                Яке майно може бути поставлене на облік?
+            </button>
+        </h2>
+        <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Майно, що може бути встановлене на облік повинно відповідати наступним критеріям:
+                <ul class="list-group">
+                    <li class="list-group-item">Пошкоджене через бойові дії після 24 лютого 2022</li>
+                    <li class="list-group-item">Після набрання чинності Указу Президента України «Про введення воєнного стану в Україні» від 24 лютого 2022 року № 64/2022</li>
+                    <li class="list-group-item">Розміщене на неокупованій території</li>
+                    <li class="list-group-item">Відповідно до переліку територій, на яких ведуться (велися) бойові дії або тимчасово окупованих затверджених Мінреінтеграції</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="faqHeading3">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+            Пов'язані закони та накази
+        </button>
+    </h2>
+    <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+            <ul class="list-group">
+                <li class="list-group-item"> <a href="https://zakon.rada.gov.ua/laws/show/380-2022-%D0%BF#Text">https://zakon.rada.gov.ua/laws/show/380-2022-%D0%BF#Text</a></li>
+                <li class="list-group-item"><a href="https://zakon.rada.gov.ua/laws/show/381-2023-%D0%BF#Text">https://zakon.rada.gov.ua/laws/show/381-2023-%D0%BF#Text</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
 </body>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </html>

@@ -2,6 +2,8 @@ package ua.kneu.majnoreg.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,14 +40,22 @@ public class DeclarationService {
 
     }
 
-
     public List<Declaration> findDeclarationsByUserId(int id){
         return declarationRepository.findByUserInformation_Id(id);
+    }
+
+    public Page<Declaration> findByPropertyTypeIdAndAddressContaining(Integer propertyTypeId, String address, Pageable pageable){
+        return declarationRepository.findByPropertyTypeIdAndAddressContaining(propertyTypeId, address, pageable);
     }
 
     public List<Declaration> findAll(){
         log.info("Request to find all declarations");
         return declarationRepository.findAll();
+    }
+
+    public Page<Declaration> findAll(Pageable pageable){
+        log.info("Request to find all declarations");
+        return declarationRepository.findAll(pageable);
     }
 
     public List<PropertyType> findAllPropertyTypes(){

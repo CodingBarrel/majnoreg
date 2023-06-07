@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="navbar">
     <div class="container">
-        <a href="/">Головна</a>
-        <a href="/declarations">Реєстр</a>
-        <a href="/about">Про нас</a>
-        <a sec:authorize="isAuthenticated()" href="/user/declarations">Обліковий запис</a>
-        <a sec:authorize="!isAuthenticated()" href="/auth/login">Авторизація</a>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <ul class="nav col-md-auto">
+                <li sec:authorize="hasAnyRole('OWNER','ADMIN')"><a class="nav-link link-dark px-2" href="/admin-panel">Адмін-панель</a>
+                </li>
+                <li><a class="nav-link link-dark px-2" href="/">Головна</a></li>
+                <li><a class="nav-link link-dark px-2" href="/declarations/search">Реєстр</a></li>
+                <li><a class="nav-link link-dark px-2" href="/about">Про нас</a></li>
+            </ul>
+            <div class="col-md-auto text-end">
+                <a sec:authorize="isAuthenticated()" class="nav-link link-dark px-2" href="/user/declarations">Обліковий
+                    запис</a>
+                <a sec:authorize="!isAuthenticated()" class="nav-link link-dark px-2" href="/auth/login">Авторизація</a>
+            </div>
+        </header>
     </div>
 </div>
 </html>

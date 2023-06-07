@@ -20,7 +20,6 @@
         <th>Час надсилання</th>
         <th>Час останнього оновлення</th>
         <th></th>
-        <th></th>
     </tr>
     <tr th:each="declaration : ${declarations}">
         <td th:text="${declaration.id}"></td>
@@ -33,12 +32,7 @@
         <td th:text="${declaration.sendTime}"></td>
         <td th:text="${declaration.lastUpdateTime}"></td>
         <td>
-            <a th:href="@{{id}/edit (id=${declaration.id})}">редагувати</a>
-        </td>
-        <td>
-            <form th:method="delete" th:action="@{/declarations/{id} (id=${declaration.id})}">
-                <input type="submit" value="видалити">
-            </form>
+            <a th:href="@{{id}/verify (id=${declaration.id})}">перевірити</a>
         </td>
     </tr>
 </table>

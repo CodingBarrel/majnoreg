@@ -18,7 +18,7 @@ public class Declaration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne
     private UserInformation userInformation;
     @ManyToOne
     private PropertyType propertyType;
